@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  resources :records
-  resources :artists
   namespace :api do
     namespace :v1 do
-            end
+      resources :records
+      resources :artists
+    end
   end
 
   root to: "home#index"
