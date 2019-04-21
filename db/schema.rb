@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_21_202452) do
+ActiveRecord::Schema.define(version: 2019_04_21_205537) do
 
   create_table "artists", force: :cascade do |t|
     t.string "name"
@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(version: 2019_04_21_202452) do
     t.string "title"
     t.string "year"
     t.integer "artist_id"
-    t.string "user"
-    t.string "references"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artist_id"], name: "index_records_on_artist_id"
+    t.index ["user_id"], name: "index_records_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

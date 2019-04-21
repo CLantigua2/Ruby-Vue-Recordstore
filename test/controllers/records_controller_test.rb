@@ -12,7 +12,7 @@ class RecordsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create record" do
     assert_difference('Record.count') do
-      post records_url, params: { record: { artist_id: @record.artist_id, references: @record.references, title: @record.title, user: @record.user, year: @record.year } }, as: :json
+      post records_url, params: { record: { artist_id: @record.artist_id, title: @record.title, user_id: @record.user_id, year: @record.year } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class RecordsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update record" do
-    patch record_url(@record), params: { record: { artist_id: @record.artist_id, references: @record.references, title: @record.title, user: @record.user, year: @record.year } }, as: :json
+    patch record_url(@record), params: { record: { artist_id: @record.artist_id, title: @record.title, user_id: @record.user_id, year: @record.year } }, as: :json
     assert_response 200
   end
 

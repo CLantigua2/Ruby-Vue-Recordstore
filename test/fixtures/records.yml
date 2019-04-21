@@ -4,12 +4,10 @@ one:
   title: MyString
   year: MyString
   artist: one
-  user: MyString
-  references: MyString
+  user: one
 
 two:
   title: MyString
   year: MyString
   artist: two
-  user: MyString
-  references: MyString
+  user: two
