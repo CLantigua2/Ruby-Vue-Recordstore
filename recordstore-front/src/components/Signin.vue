@@ -42,39 +42,45 @@ export default {
       email: "",
       password: "",
       error: ""
-    };
+    }
   },
   created() {
-    this.checkSignIn();
+    this.checkSignIn()
   },
   updated() {
-    this.checkSignIn();
+    this.checkSignIn()
   },
   methods: {
     signin() {
       this.$http.plain
         .post("/signin", { email: this.email, password: this.password })
         .then(resonse => this.signinSuccessful(resonse))
-        .catch(err => this.signinFailed(err));
+        .catch(err => this.signinFailed(err))
     },
     signinSuccessful(resonse) {
       if (!resonse.data.csrf) {
-        this.signinFailed(resonse);
-        return;
+        this.signinFailed(resonse)
+        return
       }
-      localStorage.csrf = resonse.data.csrf;
-      localStorage.signedIn = true;
-      this.error = "";
-      this.$router.replace("/records");
+      localStorage.csrf = resonse.data.csrf
+      localStorage.signedIn = true
+      this.error = ""
+      this.$router.replace("/records")
     },
     signinFailed(error) {
       this.error =
         (error.response && error.response.data && error.response.data.error) ||
-        "";
-      delete localStorage.csrf;
+        ""
+      delete localStorage.csrf
+      delete localStorage.signedIn
+    },
+    checkSignIn() {
+      if (localStorage.signedIn) {
+        this.$router.replace("/records")
+      }
     }
   }
-};
+}
 </script>
 
 <style>

@@ -32,7 +32,7 @@ securedAxiosInstance.interceptors.request.use(config => {
 
 securedAxiosInstance.interceptors.response.use(null, error => {
     if (error.response && error.response.config && error.response.status === 401) {
-        //refresh
+        // refresh
         return plainAxiosInstance.post('/refresh', {}, { headers: { 'X-CSRF-TOKEN': localStorage.csrf } })
             .then(response => {
                 localStorage.csrf = response.data.csrf
