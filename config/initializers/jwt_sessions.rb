@@ -1,1 +1,1 @@
-JWTSessions.encryption_key = 'use_something_else_other_than_secrets'
+JWTSessions.encryption_key = 'secret'

@@ -73,7 +73,6 @@ export default {
         return
       }
       this.$http.secured.post('/api/v1/artists/', { artist: { name: this.newArtist.name } })
-
         .then(response => {
           this.artists.push(response.data)
           this.newArtist = ''

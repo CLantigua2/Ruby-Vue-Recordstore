@@ -55,7 +55,6 @@ export default {
         this.signupFailed(response)
         return
       }
-
       localStorage.csrf = response.data.csrf
       localStorage.signedIn = true
       this.error = ''
