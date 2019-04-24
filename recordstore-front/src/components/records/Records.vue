@@ -106,6 +106,55 @@
                 this.$http.secured.get('/api/v1/records')
                 .then(response => { this.records = response.data })
                 .catch(error => this.setError(error, "Something went wrong"))
+
+                this.$http.secured.get('/api/v1/artists')
+                .then(response => { this.artists = response.data })
+                .catch(error => this.setError(error, "Something went wrong"))
+            }
+        },
+        methods: {
+            setError (error, text) {
+                this.error = (error.response && error.response.data && error.response.data.error) || text
+            },
+            getArtist (record) {
+                const recordArtistValues = this.artists.filter(artist => artist.id === record.artist_id)
+
+                let artist
+
+                recordArtistValues.forEach(element => {
+                    artist = element.name
+                })
+
+                return artist
+            },
+            addRecord () {
+                const value = this.newRecord
+                const { title, year, artist_id } = this.newRecord
+                if (!value) {
+                    return
+                } else {
+                    this.$http.secured.post(`/api/v1/records/`, { record: { title, year, artist_id }})
+                    .then(response => {
+                        this.records.push(response.data)
+                        this.newRecord = ''
+                    })
+                    .catch(error => this.setError(error, 'Cannot create record'))
+                }
+            },
+            removeRecord (record) {
+                this.$http.secured.delete(`/api/v1/records/${record.id}`)
+                .then(response => {
+                    this.records.splice(this.records.indexOf(record), 1)
+                })
+                .catch(error => this.setError(error, 'Cannot delete that record'))
+            },
+            editRecord (record) {
+                this.editedRecord = record
+            },
+            updateRecord (record) {
+                this.editRecord = ''
+                this.$http.secured.patch(`/api/v1/records/${reecord.id}`, { record: { title: record.title, year: record.year, artist_id: record.artist }})
+                .catch(error => this.setError(error, 'Cannot update that record.'))
             }
         }
     }
